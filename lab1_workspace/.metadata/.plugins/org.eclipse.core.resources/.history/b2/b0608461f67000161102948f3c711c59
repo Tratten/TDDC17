@@ -101,29 +101,21 @@ class MyAgentState
 
 class MyAgentProgram implements AgentProgram {
 	
-	private Action rotateRight() {
-		state.agent_last_action = state.ACTION_TURN_RIGHT;
-		state.agent_direction = ((state.agent_direction+1) % 4);
-		return LIUVacuumEnvironment.ACTION_TURN_RIGHT;
-	}
-	
-	private Action rotateLeft() {
-		state.agent_last_action = state.ACTION_TURN_LEFT;
-	    state.agent_direction = ((state.agent_direction-1) % 4);
-	    if (state.agent_direction<0) 
-	    	state.agent_direction +=4;
-		return LIUVacuumEnvironment.ACTION_TURN_LEFT;
-	}
 	
 	private Action rotateEast(){
 		if (state.agent_direction == 3 || state.agent_direction == 0) {
-			return rotateRight();
+			state.agent_last_action = state.ACTION_TURN_RIGHT;
+			state.agent_direction = ((state.agent_direction+1) % 4);
+			return LIUVacuumEnvironment.ACTION_TURN_RIGHT;
 		}
 		else if (state.agent_direction == 2){
-			return rotateLeft();
+			state.agent_last_action = state.ACTION_TURN_LEFT;
+		    state.agent_direction = ((state.agent_direction-1) % 4);
+		    if (state.agent_direction<0) 
+		    	state.agent_direction +=4;
+			return LIUVacuumEnvironment.ACTION_TURN_LEFT;
 		}
 		System.out.println("Dir is east: " + state.agent_direction);
-		state.agent_last_action = state.ACTION_MOVE_FORWARD;
 		return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
 	}
 	
@@ -134,10 +126,16 @@ class MyAgentProgram implements AgentProgram {
 	    		return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
     		}
     		else if (state.agent_direction == 1){
-    			return rotateLeft();
+    			state.agent_last_action = state.ACTION_TURN_LEFT;
+    		    state.agent_direction = ((state.agent_direction-1) % 4);
+    		    if (state.agent_direction<0) 
+    		    	state.agent_direction +=4;
+    			return LIUVacuumEnvironment.ACTION_TURN_LEFT;
     		}
     		else {
-    			return rotateRight();
+    			state.agent_last_action = state.ACTION_TURN_RIGHT;
+    			state.agent_direction = ((state.agent_direction+1) % 4);
+    			return LIUVacuumEnvironment.ACTION_TURN_RIGHT;
     		}
     	}
     	else if (state.agent_x_position != 1) {
@@ -146,14 +144,19 @@ class MyAgentProgram implements AgentProgram {
 	    		return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
     		}
     		else if (state.agent_direction == 0){
-    			return rotateLeft();
+    			state.agent_last_action = state.ACTION_TURN_LEFT;
+    		    state.agent_direction = ((state.agent_direction-1) % 4);
+    		    if (state.agent_direction<0) 
+    		    	state.agent_direction +=4;
+    			return LIUVacuumEnvironment.ACTION_TURN_LEFT;
     		}
     		else {
-    			return rotateRight();
+    			state.agent_last_action = state.ACTION_TURN_RIGHT;
+    			state.agent_direction = ((state.agent_direction+1) % 4);
+    			return LIUVacuumEnvironment.ACTION_TURN_RIGHT;
     		}
     	}
 		System.out.println("I should really not be here");
-		state.agent_last_action = state.ACTION_MOVE_FORWARD;
 		return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
 	}
 	
@@ -180,9 +183,15 @@ class MyAgentProgram implements AgentProgram {
 		initnialRandomActions--;
 		state.updatePosition(percept);
 		if(action==0) {
-		    return rotateLeft();
+		    state.agent_direction = ((state.agent_direction-1) % 4);
+		    if (state.agent_direction<0) 
+		    	state.agent_direction +=4;
+		    state.agent_last_action = state.ACTION_TURN_LEFT;
+			return LIUVacuumEnvironment.ACTION_TURN_LEFT;
 		} else if (action==1) {
-			return rotateRight();
+			state.agent_direction = ((state.agent_direction+1) % 4);
+		    state.agent_last_action = state.ACTION_TURN_RIGHT;
+		    return LIUVacuumEnvironment.ACTION_TURN_RIGHT;
 		} 
 		state.agent_last_action=state.ACTION_MOVE_FORWARD;
 		return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
@@ -272,7 +281,6 @@ class MyAgentProgram implements AgentProgram {
 	    	//return suckDirt();
 	    }
 	    else {
-	    	System.out.println("GOING HOME AGAIN");
 	    	state.findHome = true; // go home
 	    	return findHome();
 	    }
@@ -281,17 +289,16 @@ class MyAgentProgram implements AgentProgram {
 	    if(state.agent_next_action != state.ACTION_NONE){
     		if(state.agent_next_action == state.ACTION_MOVE_FORWARD) {
     			state.agent_next_action = state.ACTION_NONE;
-    			state.agent_last_action = state.ACTION_MOVE_FORWARD;
     			return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
     		}
     		else if(state.agent_next_action == state.ACTION_TURN_RIGHT) {
     			state.agent_next_action = state.ACTION_NONE;
-    			return rotateRight();
+    			return LIUVacuumEnvironment.ACTION_TURN_RIGHT;
     		}
     			
     		else if(state.agent_next_action == state.ACTION_TURN_LEFT) {
     			state.agent_next_action = state.ACTION_NONE;
-    			return rotateLeft();
+    			return LIUVacuumEnvironment.ACTION_TURN_LEFT;
     		}
     	}
 	    
@@ -300,10 +307,14 @@ class MyAgentProgram implements AgentProgram {
     	{
     		state.agent_next_action = state.ACTION_MOVE_FORWARD;
     		if (state.agent_direction == 1) {
-    			return rotateRight();
+    			state.agent_last_action=state.ACTION_TURN_RIGHT;
+    			state.agent_direction = ((state.agent_direction+1) % 4);
+    			return LIUVacuumEnvironment.ACTION_TURN_RIGHT;
     		}
     		if (state.agent_direction == 3) {
-    			return rotateLeft();
+    			state.agent_last_action=state.ACTION_TURN_LEFT;
+    			state.agent_direction = ((state.agent_direction-1) % 4);
+    			return LIUVacuumEnvironment.ACTION_TURN_LEFT;
     		}
     	}
     	

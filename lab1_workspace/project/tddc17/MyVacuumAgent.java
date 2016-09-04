@@ -6,6 +6,8 @@ import aima.core.agent.Action;
 import aima.core.agent.AgentProgram;
 import aima.core.agent.Percept;
 import aima.core.agent.impl.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import java.util.Random;
 
@@ -36,6 +38,9 @@ class MyAgentState
 	public static final int SOUTH = 2;
 	public static final int WEST = 3;
 	public int agent_direction = EAST;
+
+	public Queue<int> queue = new LinkedList();
+	//queue.poll() to pop head .peek() to read head
 	
 	
 	MyAgentState()
@@ -100,6 +105,22 @@ class MyAgentState
 }
 
 class MyAgentProgram implements AgentProgram {
+
+	// Returns an array of coordinates array of tuples? to the closest of type target. Empty list otherwhise
+	private int[] bfs(int target){
+		Queue<int,int> frontier = new LinkedList(); // queue containing coordinates
+
+		while(frontier.peek() != null){
+			int currentNode = frontier.poll();
+			//for every neigbour to currentNode check:
+			// if it is of type target then return solution
+			// if it is not a wall the add it to the queue
+
+		}
+
+		// no solution found
+		return [];
+	}
 	
 	private Action rotateRight() {
 		state.agent_last_action = state.ACTION_TURN_RIGHT;

@@ -130,7 +130,6 @@ class MyAgentProgram implements AgentProgram {
 				if(state.world[neighbours.get(i).x][neighbours.get(i).y] == target){
 					System.out.println("if");
 					//target found, return result
-					neighbours.get(i).path.add(currentNode);
 					return neighbours.get(i).path;
 				}
 				else {

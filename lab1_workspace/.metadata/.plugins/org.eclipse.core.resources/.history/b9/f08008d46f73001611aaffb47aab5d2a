@@ -121,7 +121,7 @@ class MyAgentProgram implements AgentProgram {
 		while(frontier.peek() != null){
 			currentNode = frontier.poll();
 			System.out.println(currentNode);
-			state.world[currentNode.x][currentNode.y] = state.EXPLORED;
+			state.world[Node.x][Node.y] = state.EXPLORED;
 			
 			List<Node> neighbours = findNeighbours(currentNode);
 			
@@ -130,7 +130,6 @@ class MyAgentProgram implements AgentProgram {
 				if(state.world[neighbours.get(i).x][neighbours.get(i).y] == target){
 					System.out.println("if");
 					//target found, return result
-					neighbours.get(i).path.add(currentNode);
 					return neighbours.get(i).path;
 				}
 				else {

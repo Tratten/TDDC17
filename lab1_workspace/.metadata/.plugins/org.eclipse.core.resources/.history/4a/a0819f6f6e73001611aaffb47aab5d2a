@@ -120,26 +120,19 @@ class MyAgentProgram implements AgentProgram {
 		
 		while(frontier.peek() != null){
 			currentNode = frontier.poll();
-			System.out.println(currentNode);
-			state.world[currentNode.x][currentNode.y] = state.EXPLORED;
+			state.world[Node.x][Node.y] = state.EXPLORED;
 			
 			List<Node> neighbours = findNeighbours(currentNode);
 			
 			for(int i = 0; i < neighbours.size(); i++){
-				System.out.println("x: "+ neighbours.get(i).x + " y: " + neighbours.get(i).y + " size: " + neighbours.size());
 				if(state.world[neighbours.get(i).x][neighbours.get(i).y] == target){
-					System.out.println("if");
 					//target found, return result
-					neighbours.get(i).path.add(currentNode);
 					return neighbours.get(i).path;
 				}
 				else {
-					System.out.println("else");
 					//push to queue
 					neighbours.get(i).path.add(currentNode);
-					System.out.println("HEJ");
 					frontier.add(neighbours.get(i));
-					System.out.println("TJA");
 				}
 			}
 		}

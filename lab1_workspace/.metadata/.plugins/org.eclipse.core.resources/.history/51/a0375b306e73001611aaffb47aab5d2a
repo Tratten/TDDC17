@@ -115,31 +115,23 @@ class MyAgentProgram implements AgentProgram {
 		Queue<Node> frontier = new LinkedList<Node>(); // queue containing coordinates
 		Node currentNode = new Node(state.agent_x_position, state.agent_y_position);
 		frontier.add(currentNode);
-		System.out.println(frontier.peek());
 		
 		
 		while(frontier.peek() != null){
 			currentNode = frontier.poll();
-			System.out.println(currentNode);
-			state.world[currentNode.x][currentNode.y] = state.EXPLORED;
+			state.world[Node.x][Node.y] = state.EXPLORED;
 			
 			List<Node> neighbours = findNeighbours(currentNode);
 			
 			for(int i = 0; i < neighbours.size(); i++){
-				System.out.println("x: "+ neighbours.get(i).x + " y: " + neighbours.get(i).y + " size: " + neighbours.size());
 				if(state.world[neighbours.get(i).x][neighbours.get(i).y] == target){
-					System.out.println("if");
 					//target found, return result
-					neighbours.get(i).path.add(currentNode);
 					return neighbours.get(i).path;
 				}
 				else {
-					System.out.println("else");
 					//push to queue
 					neighbours.get(i).path.add(currentNode);
-					System.out.println("HEJ");
 					frontier.add(neighbours.get(i));
-					System.out.println("TJA");
 				}
 			}
 		}
@@ -157,19 +149,19 @@ class MyAgentProgram implements AgentProgram {
 		int right = state.world[origin.x+1][origin.y];
 		int down = state.world[origin.x][origin.y+1];
 		
-		if(up != state.WALL && up != state.EXPLORED){
+		if(up != state.WALL){
 			result.add(new Node(origin.x, origin.y-1));
 		}
 		
-		if(left != state.WALL && left != state.EXPLORED){
+		if(left != state.WALL){
 			result.add(new Node(origin.x-1, origin.y));
 		}
 		
-		if(right != state.WALL && right != state.EXPLORED){
+		if(right != state.WALL){
 			result.add(new Node(origin.x+1, origin.y));
 		}
 		
-		if(down != state.WALL && down != state.EXPLORED){
+		if(down != state.WALL){
 			result.add(new Node(origin.x, origin.y+1));
 		}
 		

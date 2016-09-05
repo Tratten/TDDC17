@@ -111,41 +111,28 @@ class MyAgentProgram implements AgentProgram {
 
 	// Returns an array of coordinates array of tuples? to the closest of type target. Empty list otherwhise
 	private List<Node> bfs(int target){
-		System.out.println("In bfs "+ target);
-		Queue<Node> frontier = new LinkedList<Node>(); // queue containing coordinates
-		Node currentNode = new Node(state.agent_x_position, state.agent_y_position);
-		frontier.add(currentNode);
-		System.out.println(frontier.peek());
-		
-		
+		Queue<Node> frontier = new LinkedList(); // queue containing coordinates
+
 		while(frontier.peek() != null){
-			currentNode = frontier.poll();
-			System.out.println(currentNode);
-			state.world[currentNode.x][currentNode.y] = state.EXPLORED;
+			Node currentNode = frontier.poll();
+			state.world[Node.x][Node.y] = state.EXPLORED;
 			
 			List<Node> neighbours = findNeighbours(currentNode);
 			
 			for(int i = 0; i < neighbours.size(); i++){
-				System.out.println("x: "+ neighbours.get(i).x + " y: " + neighbours.get(i).y + " size: " + neighbours.size());
 				if(state.world[neighbours.get(i).x][neighbours.get(i).y] == target){
-					System.out.println("if");
 					//target found, return result
-					neighbours.get(i).path.add(currentNode);
 					return neighbours.get(i).path;
 				}
 				else {
-					System.out.println("else");
 					//push to queue
 					neighbours.get(i).path.add(currentNode);
-					System.out.println("HEJ");
 					frontier.add(neighbours.get(i));
-					System.out.println("TJA");
 				}
 			}
 		}
 
 		// no solution found
-		System.out.println("No solution man!");
 		return null;
 	}
 	
@@ -157,19 +144,19 @@ class MyAgentProgram implements AgentProgram {
 		int right = state.world[origin.x+1][origin.y];
 		int down = state.world[origin.x][origin.y+1];
 		
-		if(up != state.WALL && up != state.EXPLORED){
+		if(up != state.WALL){
 			result.add(new Node(origin.x, origin.y-1));
 		}
 		
-		if(left != state.WALL && left != state.EXPLORED){
+		if(left != state.WALL){
 			result.add(new Node(origin.x-1, origin.y));
 		}
 		
-		if(right != state.WALL && right != state.EXPLORED){
+		if(right != state.WALL){
 			result.add(new Node(origin.x+1, origin.y));
 		}
 		
-		if(down != state.WALL && down != state.EXPLORED){
+		if(down != state.WALL){
 			result.add(new Node(origin.x, origin.y+1));
 		}
 		
@@ -220,20 +207,17 @@ class MyAgentProgram implements AgentProgram {
 	private Queue<Integer> rotateDir(int myDir, int targetDir){
 		Queue<Integer> result = new LinkedList<Integer>();
 		if(myDir == targetDir){
-			System.out.println("==");
 			result.add(state.ACTION_MOVE_FORWARD);
-//			debugQueue(result);
+			debugQueue(result);
 			return result;
 		}
 		while(myDir != targetDir){
-			System.out.println("!=");
 			result.add(state.ACTION_TURN_RIGHT);
-//			debugQueue(result);
+			debugQueue(result);
 			myDir = (myDir+1) % 4;
 		}
-		System.out.println("else");
 		result.add(state.ACTION_MOVE_FORWARD);
-//		debugQueue(result);
+		debugQueue(result);
 		return result;
 	}
 	
@@ -361,9 +345,7 @@ class MyAgentProgram implements AgentProgram {
 	    	return performTask(state.actionQueue.poll(),p);
 	    } else {
 	    	List<Node> path = bfs(state.UNKNOWN);
-	    	System.out.println("Hejhej"+ path);
 	    	state.actionQueue =  goToGoal(path, state.agent_direction, state.agent_x_position, state.agent_y_position);
-	    	System.out.println("Yoyo");
 	    	return performTask(state.actionQueue.poll(), p);
 	    }
 	    

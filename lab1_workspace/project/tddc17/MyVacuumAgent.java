@@ -16,7 +16,7 @@ import java.util.Random;
 
 class MyAgentState
 {
-	public int[][] world = new int[20][20];
+	public int[][] world = new int[30][30];
 	public int initialized = 0;
 	final int UNKNOWN 	= 0;
 	final int WALL 		= 1;
@@ -81,7 +81,7 @@ class MyAgentState
 	
 	public void updateWorld(int x_position, int y_position, int info)
 	{
-		System.out.println("Update world got x: " + x_position + "And y: " + y_position + "Info: " + info);
+//		System.out.println("Update world got x: " + x_position + "And y: " + y_position + "Info: " + info);
 		world[x_position][y_position] = info;
 	}
 	
@@ -114,32 +114,61 @@ class MyAgentProgram implements AgentProgram {
 	private List<Node> bfs(int target){
 		System.out.println("In bfs "+ target);
 		Queue<Node> frontier = new LinkedList<Node>(); // queue containing coordinates
+		ArrayList<Node> searched = new ArrayList<Node>();
 		Node currentNode = new Node(state.agent_x_position, state.agent_y_position);
 		frontier.add(currentNode);
+		searched.add(currentNode);
 		System.out.println(frontier.peek());
 		
 		
 		while(frontier.peek() != null){
 			currentNode = frontier.poll();
-			System.out.println(currentNode);
+			System.out.println("Enter: " + currentNode);
 //			state.world[currentNode.x][currentNode.y] = state.EXPLORED;
 			
 			List<Node> neighbours = findNeighbours(currentNode);
 			
 			for(int i = 0; i < neighbours.size(); i++){
-				System.out.println("x: "+ neighbours.get(i).x + " y: " + neighbours.get(i).y + " size: " + neighbours.size());
+				System.out.println("x: "+ neighbours.get(i).x + " y: " + neighbours.get(i).y + " size: " + neighbours.size() + " type: " + state.world[neighbours.get(i).x][neighbours.get(i).y]);
 				if(state.world[neighbours.get(i).x][neighbours.get(i).y] == target){
-					System.out.println("if");
-					//target found, return result
-					neighbours.get(i).path.add(new Node(neighbours.get(i).x, neighbours.get(i).y));
-					return neighbours.get(i).path;
+					for(int j = 0; j < searched.size(); j++){
+						System.out.println("Searched: "+ searched.get(j));
+					}
+					if(!searched.contains(neighbours.get(i))){
+						System.out.println("if");
+						//target found, return result
+						System.out.println("size before add: " + neighbours.get(i).path.size());
+						
+						// Build prevList
+						for(int j = 0; j<currentNode.path.size(); j++){
+							System.out.println("PrevList");
+							neighbours.get(i).path.add(currentNode.path.get(j));
+						}
+						neighbours.get(i).path.add(neighbours.get(i));
+						
+						System.out.println("size: " + neighbours.get(i).path.size());
+						for(int j = 0; j<neighbours.get(i).path.size(); j++){
+							System.out.println("Path: " + neighbours.get(i).path.get(j).toString());
+						}
+						return neighbours.get(i).path;
+					} else {
+						System.out.println("NODE IS SEARCHED ##############################################");
+					}
 				}
 				else {
 					System.out.println("else");
 					//push to queue
-					neighbours.get(i).path.add(currentNode);
-					System.out.println("HEJ");
+					
+					// Build prevList
+					for(int j = 0; j<currentNode.path.size(); j++){
+						System.out.println("PrevList");
+						neighbours.get(i).path.add(currentNode.path.get(j));
+					}
+					neighbours.get(i).path.add(neighbours.get(i));
+					
+					System.out.println("HEJ: "+ currentNode);
 					frontier.add(neighbours.get(i));
+					searched.add(currentNode);
 					System.out.println("TJA");
 				}
 			}
@@ -202,7 +231,7 @@ class MyAgentProgram implements AgentProgram {
 						return rotateDir(dir, state.SOUTH);
 					} else {
 						//ERROR
-						System.out.println("Should not be here!");
+						System.out.println("Should not be here! " + x + " " + y );
 					}
 				}
 			}
@@ -221,18 +250,18 @@ class MyAgentProgram implements AgentProgram {
 	private Queue<Integer> rotateDir(int myDir, int targetDir){
 		Queue<Integer> result = new LinkedList<Integer>();
 		if(myDir == targetDir){
-			System.out.println("==");
+//			System.out.println("==");
 			result.add(state.ACTION_MOVE_FORWARD);
 //			debugQueue(result);
 			return result;
 		}
 		while(myDir != targetDir){
-			System.out.println("!=");
+//			System.out.println("!=");
 			result.add(state.ACTION_TURN_RIGHT);
 //			debugQueue(result);
 			myDir = (myDir+1) % 4;
 		}
-		System.out.println("else");
+//		System.out.println("else");
 		result.add(state.ACTION_MOVE_FORWARD);
 //		debugQueue(result);
 		return result;
@@ -299,7 +328,7 @@ class MyAgentProgram implements AgentProgram {
     		// process percept for the last step of the initial random actions
     		initnialRandomActions--;
     		state.updatePosition((DynamicPercept) percept);
-			System.out.println("Processing percepts after the last execution of moveToRandomStartPosition()");
+//			System.out.println("Processing percepts after the last execution of moveToRandomStartPosition()");
 			state.agent_last_action=state.ACTION_SUCK;
 	    	return LIUVacuumEnvironment.ACTION_SUCK;
     	}
@@ -310,7 +339,6 @@ class MyAgentProgram implements AgentProgram {
 	    iterationCounter--;
 	    
 	    if (iterationCounter==0) {
-	    	System.out.println("Heeeej!");
 	    	return NoOpAction.NO_OP;
 	    }
 	    DynamicPercept p = (DynamicPercept) percept;
@@ -360,19 +388,25 @@ class MyAgentProgram implements AgentProgram {
 	    }
 	    
 	    if(!state.actionQueue.isEmpty()){
+	    	System.out.println("QueueTasks Not Empty --------------------------------");
 	    	return performTask(state.actionQueue.poll(),p);
 	    } else {
 	    	List<Node> path = bfs(state.UNKNOWN);
 	    	System.out.println("Hejhej"+ path);
 	    	state.actionQueue =  goToGoal(path, state.agent_direction, state.agent_x_position, state.agent_y_position);
 	    	System.out.println("Yoyo"+state.actionQueue.peek());
+	    	if(state.actionQueue == null){
+	    		System.out.println("DOOOONE!-------------------------------------------");
+	    		path = bfs(state.HOME);
+	    		state.actionQueue =  goToGoal(path, state.agent_direction, state.agent_x_position, state.agent_y_position);
+	    	}
 	    	return performTask(state.actionQueue.poll(), p);
 	    }
 	    
 	}
 
 	private Action performTask(int action, DynamicPercept p) {
-		System.out.println("Performtask");
+//		System.out.println("Performtask");
 		if(action == state.ACTION_MOVE_FORWARD){
 //			state.updatePosition(p);
 			state.agent_last_action = state.ACTION_MOVE_FORWARD;

@@ -11,4 +11,9 @@ public class Node {
 		this.y = y;
 		this.path = new ArrayList<Node>();
 	}
+	
+	public String toString(){
+		return "x: " + this.x + " y: " + this.y;
+		
+	}
 }

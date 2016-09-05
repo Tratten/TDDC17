@@ -101,7 +101,6 @@ class MyAgentState
 					System.out.print(" D ");
 				if (world[j][i]==HOME)
 					System.out.print(" H ");
-
 			}
 			System.out.println("");
 		}
@@ -122,7 +121,7 @@ class MyAgentProgram implements AgentProgram {
 		while(frontier.peek() != null){
 			currentNode = frontier.poll();
 			System.out.println(currentNode);
-//			state.world[currentNode.x][currentNode.y] = state.EXPLORED;
+			state.world[currentNode.x][currentNode.y] = state.EXPLORED;
 			
 			List<Node> neighbours = findNeighbours(currentNode);
 			
@@ -158,19 +157,19 @@ class MyAgentProgram implements AgentProgram {
 		int right = state.world[origin.x+1][origin.y];
 		int down = state.world[origin.x][origin.y+1];
 		
-		if(up != state.WALL){
+		if(up != state.WALL && up != state.EXPLORED){
 			result.add(new Node(origin.x, origin.y-1));
 		}
 		
-		if(left != state.WALL){
+		if(left != state.WALL && left != state.EXPLORED){
 			result.add(new Node(origin.x-1, origin.y));
 		}
 		
-		if(right != state.WALL){
+		if(right != state.WALL && right != state.EXPLORED){
 			result.add(new Node(origin.x+1, origin.y));
 		}
 		
-		if(down != state.WALL){
+		if(down != state.WALL && down != state.EXPLORED){
 			result.add(new Node(origin.x, origin.y+1));
 		}
 		

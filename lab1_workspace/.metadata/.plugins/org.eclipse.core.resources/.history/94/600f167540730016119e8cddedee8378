@@ -332,10 +332,10 @@ class MyAgentProgram implements AgentProgram {
 	    }
 	    
 	    if(!state.actionQueue.isEmpty()){
-	    	return performTask(state.actionQueue.poll(),p);
+	    	return performTask(state.actionQueue.poll());
 	    } else {
 	    	List<Node> path = bfs(state.UNKNOWN);
-	    	actionQueue =  goToGoal(path, state.agent_direction, state.agent_x_position, state.agent_y_position);
+	    	goToGoal(path, state.agent_direction, state.agent_x_position, state.agent_y_position);
 	    }
 	    
 	}
@@ -343,14 +343,7 @@ class MyAgentProgram implements AgentProgram {
 	private Action performTask(int action, DynamicPercept p) {
 		if(action == state.ACTION_MOVE_FORWARD){
 			state.updatePosition(p);
-			state.agent_last_action = state.ACTION_MOVE_FORWARD;
 			return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
-		}
-		else if(action == state.ACTION_TURN_RIGHT){
-			return rotateRight();
-		}
-		else if(action == state.ACTION_TURN_LEFT) {
-			return rotateLeft();
 		}
 		return null;
 	}

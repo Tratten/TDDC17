@@ -6,10 +6,7 @@ import aima.core.agent.Action;
 import aima.core.agent.AgentProgram;
 import aima.core.agent.Percept;
 import aima.core.agent.impl.*;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 import java.util.Random;
@@ -23,7 +20,6 @@ class MyAgentState
 	final int CLEAR 	= 2;
 	final int DIRT		= 3;
 	final int HOME		= 4;
-	final int EXPLORED	= 5;
 	final int ACTION_NONE 			= 0;
 	final int ACTION_MOVE_FORWARD 	= 1;
 	final int ACTION_TURN_RIGHT 	= 2;
@@ -43,7 +39,8 @@ class MyAgentState
 	public static final int WEST = 3;
 	public int agent_direction = EAST;
 
-	public Queue<Integer> actionQueue = new LinkedList();
+	public Queue<int> queue = new LinkedList();
+	//queue.poll() to pop head .peek() to read head
 	
 	
 	MyAgentState()
@@ -110,106 +107,20 @@ class MyAgentState
 class MyAgentProgram implements AgentProgram {
 
 	// Returns an array of coordinates array of tuples? to the closest of type target. Empty list otherwhise
-	private List<Node> bfs(int target){
-		Queue<Node> frontier = new LinkedList(); // queue containing coordinates
-
-		while(frontier.peek() != null){
-			Node currentNode = frontier.poll();
-			state.world[Node.x][Node.y] = state.EXPLORED;
-			
-			List<Node> neighbours = findNeighbours(currentNode);
-			
-			for(int i = 0; i < neighbours.size(); i++){
-				if(state.world[neighbours.get(i).x][neighbours.get(i).y] == target){
-					//target found, return result
-					return neighbours.get(i).path;
-				}
-				else {
-					//push to queue
-					neighbours.get(i).path.add(currentNode);
-					frontier.add(neighbours.get(i));
-				}
-			}
-		}
-
-		// no solution found
-		return null;
-	}
-	
-	private List<Node> findNeighbours(Node origin){
-		List<Node> result = new ArrayList<Node>();
-		
-		int up = state.world[origin.x][origin.y-1];
-		int left = state.world[origin.x-1][origin.y];
-		int right = state.world[origin.x+1][origin.y];
-		int down = state.world[origin.x][origin.y+1];
-		
-		if(up != state.WALL){
-			result.add(new Node(origin.x, origin.y-1));
-		}
-		
-		if(left != state.WALL){
-			result.add(new Node(origin.x-1, origin.y));
-		}
-		
-		if(right != state.WALL){
-			result.add(new Node(origin.x+1, origin.y));
-		}
-		
-		if(down != state.WALL){
-			result.add(new Node(origin.x, origin.y+1));
-		}
-		
-		return result;
-	}
-	
-	private Queue<Integer> goToGoal(List<Node> path, int dir, int x, int y){
-		if(!path.isEmpty()) {
-			for(int i = 0; i < path.size(); i++){
-				int diffX = path.get(i).x - x;
-				int diffY = path.get(i).y - y;
-				
-				if(diffX > 0){
-					//east
-					return rotateDir(dir, state.EAST);
-				} 
-				else if(diffX < 0){
-					//west
-					return rotateDir(dir, state.WEST);
-				}
-				else if(diffX == 0){
-					if(diffY < 0){
-						//north
-						return rotateDir(dir, state.NORTH);
-					}
-					else if(diffY > 0){
-						//south
-						return rotateDir(dir, state.SOUTH);
-					} else {
-						//ERROR
-						System.out.println("Should not be here!");
-					}
-				}
-			}
-		}
-		
-		
-		return null;
-	}
-	
-	private Queue<Integer> rotateDir(int myDir, int targetDir){
-		Queue<Integer> result = 0;
-		if(myDir == targetDir){
-			result.add(state.ACTION_MOVE_FORWARD);
-			return result;
-		}
-		while(myDir != targetDir){
-			result.add(state.ACTION_TURN_RIGHT);
-			myDir = (myDir+1) % 4;
-		}
-		result.add(state.ACTION_MOVE_FORWARD);
-		return result;
-	}
+//	private int[] bfs(int target){
+//		Queue<Node> frontier = new LinkedList(); // queue containing coordinates
+//
+//		while(frontier.peek() != null){
+//			int currentNode = frontier.poll();
+//			//for every neigbour to currentNode check:
+//			// if it is of type target then return solution
+//			// if it is not a wall the add it to the queue
+//
+//		}
+//
+//		// no solution found
+//		return [];
+//	}
 	
 	private Action rotateRight() {
 		state.agent_last_action = state.ACTION_TURN_RIGHT;
@@ -225,18 +136,55 @@ class MyAgentProgram implements AgentProgram {
 		return LIUVacuumEnvironment.ACTION_TURN_LEFT;
 	}
 	
-//	private Action rotateEast(){
-//		if (state.agent_direction == 3 || state.agent_direction == 0) {
-//			return rotateRight();
-//		}
-//		else if (state.agent_direction == 2){
-//			return rotateLeft();
-//		}
-//		System.out.println("Dir is east: " + state.agent_direction);
-//		state.agent_last_action = state.ACTION_MOVE_FORWARD;
-//		return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
-//	}
+	private Action rotateEast(){
+		if (state.agent_direction == 3 || state.agent_direction == 0) {
+			return rotateRight();
+		}
+		else if (state.agent_direction == 2){
+			return rotateLeft();
+		}
+		System.out.println("Dir is east: " + state.agent_direction);
+		state.agent_last_action = state.ACTION_MOVE_FORWARD;
+		return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
+	}
 	
+	private Action findHome(){
+		if (state.agent_y_position != 1) {
+    		if (state.agent_direction == 0) {
+    			state.agent_last_action=state.ACTION_MOVE_FORWARD;
+	    		return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
+    		}
+    		else if (state.agent_direction == 1){
+    			return rotateLeft();
+    		}
+    		else {
+    			return rotateRight();
+    		}
+    	}
+    	else if (state.agent_x_position != 1) {
+    		if (state.agent_direction == 3) {
+    			state.agent_last_action=state.ACTION_MOVE_FORWARD;
+	    		return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
+    		}
+    		else if (state.agent_direction == 0){
+    			return rotateLeft();
+    		}
+    		else {
+    			return rotateRight();
+    		}
+    	}
+		System.out.println("I should really not be here");
+		state.agent_last_action = state.ACTION_MOVE_FORWARD;
+		return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
+	}
+	
+	private boolean inCorner(){
+		if(state.world[state.agent_x_position+1][state.agent_y_position] == state.WALL && state.world[state.agent_x_position][state.agent_y_position+1] == state.WALL) {
+			System.out.println("IN THE BOTTOM RIGHT CORNER!");
+			return true;
+		}
+		return false;
+	}
 
 	private int initnialRandomActions = 10;
 	private Random random_generator = new Random();
@@ -331,28 +279,61 @@ class MyAgentProgram implements AgentProgram {
 	    	return LIUVacuumEnvironment.ACTION_SUCK;
 	    }
 	    
-	    if(!state.actionQueue.isEmpty()){
-	    	return performTask(state.actionQueue.poll(),p);
-	    } else {
-	    	List<Node> path = bfs(state.UNKNOWN);
-	    	actionQueue =  goToGoal(path, state.agent_direction, state.agent_x_position, state.agent_y_position);
+	    if  (state.findHome == true) {
+	    	if(home){ // and map is clear
+	    		System.out.println("Home!");
+	    		state.findHome = false;
+	    		return rotateEast();
+	    	} else {
+	    		return findHome();
+	    	}
+	    	
+	    } 
+	    else if(!inCorner()){
+	    	//return suckDirt();
 	    }
-	    
-	}
+	    else {
+	    	System.out.println("GOING HOME AGAIN");
+	    	state.findHome = true; // go home
+	    	return findHome();
+	    }
 
-	private Action performTask(int action, DynamicPercept p) {
-		if(action == state.ACTION_MOVE_FORWARD){
-			state.updatePosition(p);
-			state.agent_last_action = state.ACTION_MOVE_FORWARD;
-			return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
-		}
-		else if(action == state.ACTION_TURN_RIGHT){
-			return rotateRight();
-		}
-		else if(action == state.ACTION_TURN_LEFT) {
-			return rotateLeft();
-		}
-		return null;
+	    // Check if we have any pending actions
+	    if(state.agent_next_action != state.ACTION_NONE){
+    		if(state.agent_next_action == state.ACTION_MOVE_FORWARD) {
+    			state.agent_next_action = state.ACTION_NONE;
+    			state.agent_last_action = state.ACTION_MOVE_FORWARD;
+    			return LIUVacuumEnvironment.ACTION_MOVE_FORWARD;
+    		}
+    		else if(state.agent_next_action == state.ACTION_TURN_RIGHT) {
+    			state.agent_next_action = state.ACTION_NONE;
+    			return rotateRight();
+    		}
+    			
+    		else if(state.agent_next_action == state.ACTION_TURN_LEFT) {
+    			state.agent_next_action = state.ACTION_NONE;
+    			return rotateLeft();
+    		}
+    	}
+	    
+	    // If bump turn 90 degrees
+    	if (bump)
+    	{
+    		state.agent_next_action = state.ACTION_MOVE_FORWARD;
+    		if (state.agent_direction == 1) {
+    			return rotateRight();
+    		}
+    		if (state.agent_direction == 3) {
+    			return rotateLeft();
+    		}
+    	}
+    	
+//    	if(state.agent_last_action == state.ACTION_TURN_LEFT){
+//    		return LIUVacuumEnvironment.ACTION_TURN_LEFT;
+//    	} else if(state.agent_last_action == state.ACTION_TURN_RIGHT){
+//    		return LIUVacuumEnvironment.ACTION_TURN_RIGHT;
+//    	}
+    	return rotateEast();
 	}
 	
 }

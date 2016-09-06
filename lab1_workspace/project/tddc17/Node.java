@@ -3,17 +3,24 @@ package tddc17;
 import java.util.ArrayList;
 
 public class Node {
+//	public int x;
+//	public int y;
+//	public ArrayList<Node> path;
+	public Node parent;
+	public boolean explored;
+	public int type;
 	public int x;
 	public int y;
-	public ArrayList<Node> path;
-	public Node(int x, int y){
+	
+	
+	public Node(int type, int x, int y){
+		this.type = type;
 		this.x = x;
 		this.y = y;
-		this.path = new ArrayList<Node>();
 	}
 	
 	public String toString(){
-		return "x: " + this.x + " y: " + this.y;
-		
+		return "X: "+ this.x +" Y: " + this.y + " P: " + this.parent + " D: " + this.explored + " T: " + this.type;
 	}
+	
 }

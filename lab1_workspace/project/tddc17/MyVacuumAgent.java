@@ -16,7 +16,8 @@ import java.util.Random;
 
 class MyAgentState
 {
-	public int[][] world = new int[30][30];
+//	public int[][] world = new int[30][30];
+	public Node[][] world = new Node[30][30];
 	public int initialized = 0;
 	final int UNKNOWN 	= 0;
 	final int WALL 		= 1;
@@ -48,10 +49,14 @@ class MyAgentState
 	
 	MyAgentState()
 	{
-		for (int i=0; i < world.length; i++)
-			for (int j=0; j < world[i].length ; j++)
-				world[i][j] = UNKNOWN;
-		world[1][1] = HOME;
+		for (int i=0; i < world.length; i++){
+			for (int j=0; j < world[i].length ; j++){
+				world[i][j].type = UNKNOWN;
+				world[i][j].x = i;
+				world[i][j].y = j;
+			}
+		}
+		world[1][1].type = HOME;
 		agent_last_action = ACTION_NONE;
 	}
 	// Based on the last action and the received percept updates the x & y agent position
@@ -82,7 +87,7 @@ class MyAgentState
 	public void updateWorld(int x_position, int y_position, int info)
 	{
 //		System.out.println("Update world got x: " + x_position + "And y: " + y_position + "Info: " + info);
-		world[x_position][y_position] = info;
+		world[x_position][y_position].type = info;
 	}
 	
 	public void printWorldDebug()
@@ -91,15 +96,15 @@ class MyAgentState
 		{
 			for (int j=0; j < world[i].length ; j++)
 			{
-				if (world[j][i]==UNKNOWN)
+				if (world[j][i].type==UNKNOWN)
 					System.out.print(" ? ");
-				if (world[j][i]==WALL)
+				if (world[j][i].type==WALL)
 					System.out.print(" # ");
-				if (world[j][i]==CLEAR)
+				if (world[j][i].type==CLEAR)
 					System.out.print(" C ");
-				if (world[j][i]==DIRT)
+				if (world[j][i].type==DIRT)
 					System.out.print(" D ");
-				if (world[j][i]==HOME)
+				if (world[j][i].type==HOME)
 					System.out.print(" H ");
 
 			}
@@ -111,17 +116,23 @@ class MyAgentState
 class MyAgentProgram implements AgentProgram {
 
 	// Returns an array of coordinates array of tuples? to the closest of type target. Empty list otherwhise
-	private List<Node> bfs(int target){
+	private Node bfs(int target){
 		System.out.println("In bfs "+ target);
+		// Init
+		for(int x = 0; x < state.world.length; x++){
+			for(int y = 0; y < state.world[x].length; y++){
+				state.world[x][y].parent = null;
+				state.world[x][y].explored = false;
+			}
+		}
 		Queue<Node> frontier = new LinkedList<Node>(); // queue containing coordinates
-		ArrayList<Node> searched = new ArrayList<Node>();
-		Node currentNode = new Node(state.agent_x_position, state.agent_y_position);
+		Node currentNode = state.world[state.agent_x_position][state.agent_y_position];
+		currentNode.explored = true;
 		frontier.add(currentNode);
-		searched.add(currentNode);
 		System.out.println(frontier.peek());
 		
 		
-		while(frontier.peek() != null){
+		while(!frontier.isEmpty()){
 			currentNode = frontier.poll();
 			System.out.println("Enter: " + currentNode);
 //			state.world[currentNode.x][currentNode.y] = state.EXPLORED;
@@ -129,47 +140,22 @@ class MyAgentProgram implements AgentProgram {
 			List<Node> neighbours = findNeighbours(currentNode);
 			
 			for(int i = 0; i < neighbours.size(); i++){
-				System.out.println("x: "+ neighbours.get(i).x + " y: " + neighbours.get(i).y + " size: " + neighbours.size() + " type: " + state.world[neighbours.get(i).x][neighbours.get(i).y]);
-				if(state.world[neighbours.get(i).x][neighbours.get(i).y] == target){
-					for(int j = 0; j < searched.size(); j++){
-						System.out.println("Searched: "+ searched.get(j));
-					}
-					if(!searched.contains(neighbours.get(i))){
+				System.out.println(neighbours.get(i).toString());
+				if(!neighbours.get(i).explored){
+					neighbours.get(i).parent = currentNode;
+					neighbours.get(i).explored = true;
+					if(neighbours.get(i).type == target){
 						System.out.println("if");
 						//target found, return result
-						System.out.println("size before add: " + neighbours.get(i).path.size());
-						
-						// Build prevList
-						for(int j = 0; j<currentNode.path.size(); j++){
-							System.out.println("PrevList");
-							neighbours.get(i).path.add(currentNode.path.get(j));
-						}
-						neighbours.get(i).path.add(neighbours.get(i));
-						
-						System.out.println("size: " + neighbours.get(i).path.size());
-						for(int j = 0; j<neighbours.get(i).path.size(); j++){
-							System.out.println("Path: " + neighbours.get(i).path.get(j).toString());
-						}
-						return neighbours.get(i).path;
-					} else {
-						System.out.println("NODE IS SEARCHED ##############################################");
+										
+						return neighbours.get(i);
 					}
-				}
-				else {
-					System.out.println("else");
-					//push to queue
-					
-					// Build prevList
-					for(int j = 0; j<currentNode.path.size(); j++){
-						System.out.println("PrevList");
-						neighbours.get(i).path.add(currentNode.path.get(j));
+					else {
+						System.out.println("else");
+						System.out.println("HEJ: "+ currentNode);
+						frontier.add(neighbours.get(i));
+						System.out.println("TJA");
 					}
-					neighbours.get(i).path.add(neighbours.get(i));
-					
-					System.out.println("HEJ: "+ currentNode);
-					frontier.add(neighbours.get(i));
-					searched.add(currentNode);
-					System.out.println("TJA");
 				}
 			}
 		}
@@ -182,25 +168,25 @@ class MyAgentProgram implements AgentProgram {
 	private List<Node> findNeighbours(Node origin){
 		List<Node> result = new ArrayList<Node>();
 		
-		int up = state.world[origin.x][origin.y-1];
-		int left = state.world[origin.x-1][origin.y];
-		int right = state.world[origin.x+1][origin.y];
-		int down = state.world[origin.x][origin.y+1];
+		Node up = state.world[origin.x][origin.y-1];
+		Node left = state.world[origin.x-1][origin.y];
+		Node right = state.world[origin.x+1][origin.y];
+		Node down = state.world[origin.x][origin.y+1];
 		
-		if(up != state.WALL){
-			result.add(new Node(origin.x, origin.y-1));
+		if(up.type != state.WALL){
+			result.add(up);
 		}
 		
-		if(left != state.WALL){
-			result.add(new Node(origin.x-1, origin.y));
+		if(left.type != state.WALL){
+			result.add(left);
 		}
 		
-		if(right != state.WALL){
-			result.add(new Node(origin.x+1, origin.y));
+		if(right.type != state.WALL){
+			result.add(right);
 		}
 		
-		if(down != state.WALL){
-			result.add(new Node(origin.x, origin.y+1));
+		if(down.type != state.WALL){
+			result.add(down);
 		}
 		
 		return result;
@@ -353,7 +339,7 @@ class MyAgentProgram implements AgentProgram {
 	    System.out.println("x=" + state.agent_x_position);
     	System.out.println("y=" + state.agent_y_position);
     	System.out.println("dir=" + state.agent_direction);
-	    
+    	
     	if (bump) {
     		System.out.println("Bump: " + state.actionQueue.peek());
 			switch (state.agent_direction) {
@@ -391,18 +377,29 @@ class MyAgentProgram implements AgentProgram {
 	    	System.out.println("QueueTasks Not Empty --------------------------------");
 	    	return performTask(state.actionQueue.poll(),p);
 	    } else {
-	    	List<Node> path = bfs(state.UNKNOWN);
+	    	List<Node> path = followParents(bfs(state.UNKNOWN));
 	    	System.out.println("Hejhej"+ path);
 	    	state.actionQueue =  goToGoal(path, state.agent_direction, state.agent_x_position, state.agent_y_position);
 	    	System.out.println("Yoyo"+state.actionQueue.peek());
 	    	if(state.actionQueue == null){
 	    		System.out.println("DOOOONE!-------------------------------------------");
-	    		path = bfs(state.HOME);
+	    		path = followParents(bfs(state.HOME));
 	    		state.actionQueue =  goToGoal(path, state.agent_direction, state.agent_x_position, state.agent_y_position);
+	    		state.actionQueue.add(state.ACTION_NONE);
 	    	}
 	    	return performTask(state.actionQueue.poll(), p);
 	    }
 	    
+	}
+
+	private List<Node> followParents(Node currentNode) {
+
+		List<Node> result = new ArrayList<Node>();
+		while(currentNode.parent != null){
+			result.add(currentNode);
+			currentNode = currentNode.parent;
+		}
+		return result;
 	}
 
 	private Action performTask(int action, DynamicPercept p) {
@@ -417,6 +414,10 @@ class MyAgentProgram implements AgentProgram {
 		}
 		else if(action == state.ACTION_TURN_LEFT) {
 			return rotateLeft();
+		}
+		else if(action == state.ACTION_NONE){
+			System.out.println("Shutting down yo");
+			return NoOpAction.NO_OP;
 		}
 		return null;
 	}

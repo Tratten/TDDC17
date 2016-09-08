@@ -1,11 +1,7 @@
 package tddc17;
 
-import java.util.ArrayList;
 
 public class Node {
-//	public int x;
-//	public int y;
-//	public ArrayList<Node> path;
 	public Node parent;
 	public boolean explored;
 	public int type;

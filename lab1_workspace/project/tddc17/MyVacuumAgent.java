@@ -17,7 +17,6 @@ import java.util.Random;
 
 class MyAgentState
 {
-//	public int[][] world = new int[30][30];
 	public Node[][] world = new Node[30][30];
 	public int initialized = 0;
 	final int UNKNOWN 	= 0;
@@ -32,7 +31,6 @@ class MyAgentState
 	final int ACTION_TURN_LEFT 		= 3;
 	final int ACTION_SUCK	 		= 4;
 	
-	public boolean findHome = false;
 	
 	public int agent_x_position = 1;
 	public int agent_y_position = 1;
@@ -45,8 +43,7 @@ class MyAgentState
 	public static final int WEST = 3;
 	public int agent_direction = EAST;
 
-	public Queue<Integer> actionQueue = new LinkedList();
-	
+	public Queue<Integer> actionQueue = new LinkedList<Integer>();
 	
 	MyAgentState()
 	{
@@ -116,7 +113,7 @@ class MyAgentState
 
 class MyAgentProgram implements AgentProgram {
 
-	// Returns an array of coordinates array of tuples? to the closest of type target. Empty list otherwhise
+	// Returns a Node object of the nearest node of type target, and null if none is found
 	private Node bfs(int target){
 		// Init
 		for(int x = 0; x < state.world.length; x++){
@@ -133,7 +130,7 @@ class MyAgentProgram implements AgentProgram {
 		while(!frontier.isEmpty()){
 			currentNode = frontier.poll();
 			
-			List<Node> neighbours = findNeighbours(currentNode);
+			List<Node> neighbours = findNeighbors(currentNode);
 			
 			for(int i = 0; i < neighbours.size(); i++){
 				if(!neighbours.get(i).explored){
@@ -155,16 +152,43 @@ class MyAgentProgram implements AgentProgram {
 		return null;
 	}
 	
-	private List<Node> findNeighbours(Node origin){
-		List<Node> result = new ArrayList<Node>();
+	/* Returns a list of the nodes adjacent to origin.
+	 * The neighbors are placed in the list so that the first Node is in the direction 
+	 * that the robot is facing.
+	 */
+	private List<Node> findNeighbors(Node origin){
+		List<Node> result = new ArrayList<Node>();		
+		Node forward,left, right, back;
+
+		// Prioritize to move forward
+		if(state.agent_direction == state.NORTH){
+			forward = state.world[origin.x][origin.y-1];
+			left = state.world[origin.x-1][origin.y];
+			right = state.world[origin.x+1][origin.y];
+			back = state.world[origin.x][origin.y+1];
+		}
+		else if(state.agent_direction == state.EAST){
+			forward = state.world[origin.x+1][origin.y];
+			left = state.world[origin.x][origin.y-1];
+			right = state.world[origin.x][origin.y+1];
+			back = state.world[origin.x-1][origin.y];
+		}
+		else if(state.agent_direction == state.SOUTH){
+			forward = state.world[origin.x][origin.y+1];
+			left = state.world[origin.x+1][origin.y];
+			right = state.world[origin.x-1][origin.y];
+			back = state.world[origin.x][origin.y-1];
+		}
+		else{
+			//West
+			forward = state.world[origin.x-1][origin.y];
+			left = state.world[origin.x][origin.y+1];
+			right = state.world[origin.x][origin.y-1];
+			back = state.world[origin.x+1][origin.y];
+		}
 		
-		Node up = state.world[origin.x][origin.y-1];
-		Node left = state.world[origin.x-1][origin.y];
-		Node right = state.world[origin.x+1][origin.y];
-		Node down = state.world[origin.x][origin.y+1];
-		
-		if(up.type != state.WALL){
-			result.add(up);
+		if(forward.type != state.WALL){
+			result.add(forward);
 		}
 		
 		if(left.type != state.WALL){
@@ -175,15 +199,19 @@ class MyAgentProgram implements AgentProgram {
 			result.add(right);
 		}
 		
-		if(down.type != state.WALL){
-			result.add(down);
+		if(back.type != state.WALL){
+			result.add(back);
 		}
 		
 		return result;
 	}
 
-	
+	/*
+	 * Returns a Queue with the necessary actions to follow the path.
+	 */
 	private Queue<Integer> goToGoal(List<Node> path, int dir, int x, int y){
+		Queue<Integer> result = new LinkedList<Integer>();
+		
 		if(!path.isEmpty()) {
 			for(int i = 0; i < path.size(); i++){
 				int diffX = path.get(i).x - x;
@@ -191,39 +219,61 @@ class MyAgentProgram implements AgentProgram {
 				
 				if(diffX > 0){
 					//east
-					return rotateDir(dir, state.EAST);
+					result = moveDir(result, dir, state.EAST);
+					x++;
+					dir = 1;
 				} 
 				else if(diffX < 0){
 					//west
-					return rotateDir(dir, state.WEST);
+					result = moveDir(result, dir, state.WEST);
+					x--;
+					dir = 3;
 				}
 				else if(diffX == 0){
 					if(diffY < 0){
 						//north
-						return rotateDir(dir, state.NORTH);
+						result = moveDir(result, dir, state.NORTH);
+						y--;
+						dir = 0;
 					}
 					else if(diffY > 0){
 						//south
-						return rotateDir(dir, state.SOUTH);
+						result = moveDir(result, dir, state.SOUTH);
+						y++;
+						dir = 2;
 					}
 				}
 			}
 		}
 		
-		
-		return null;
+		return result;
 	}
 	
-	private Queue<Integer> rotateDir(int myDir, int targetDir){
-		Queue<Integer> result = new LinkedList<Integer>();
-		if(myDir == targetDir){
-			result.add(state.ACTION_MOVE_FORWARD);
-			return result;
+	/*
+	 * Determines which way the robot should turn to use the minimal number of moves
+	 */
+	private int whichDir(int a, int b){
+		int r = b-a % 4;
+		if(Math.abs(r) == 3){
+			r = (r*(-1))/3;
 		}
-		while(myDir != targetDir){
+		return r;
+	}
+	
+	/*
+	 * Returns a Queue with actions necessary to move one tile i targetDir direction 
+	 */
+	private Queue<Integer> moveDir(Queue<Integer> result, int myDir, int targetDir){
+		int dir = whichDir(myDir, targetDir);
+		while(dir > 0){
 			result.add(state.ACTION_TURN_RIGHT);
-			myDir = (myDir+1) % 4;
+			dir--;
 		}
+		while(dir < 0){
+			result.add(state.ACTION_TURN_LEFT);
+			dir++;
+		}
+		
 		result.add(state.ACTION_MOVE_FORWARD);
 		return result;
 	}
@@ -247,7 +297,7 @@ class MyAgentProgram implements AgentProgram {
 	private Random random_generator = new Random();
 	
 	// Here you can define your variables!
-	public int iterationCounter = 10000; // Changed this boundary! Was 10 before.
+	public int iterationCounter = 10000; 
 	public MyAgentState state = new MyAgentState();
 	
 	// moves the Agent to a random start position
@@ -326,51 +376,40 @@ class MyAgentProgram implements AgentProgram {
 	    
 	    state.printWorldDebug();
 	    
-	    // Next action selection based on the percept value
-	    if (dirt)
-	    {
+	    if (dirt) {
 	    	// if dirt -> Suck
 	    	System.out.println("DIRT -> choosing SUCK action!");
 	    	state.agent_last_action=state.ACTION_SUCK;
 	    	return LIUVacuumEnvironment.ACTION_SUCK;
 	    }
-	    
-	    if(state.findHome){
-	    	if(state.agent_x_position == 1 && state.agent_y_position == 1){
-	    		return NoOpAction.NO_OP;
-	    	}
-	    	else {
-	    		Node homeBfs = bfs(state.HOME);
-	    		if(homeBfs == null){
-	    			return NoOpAction.NO_OP;
-	    		}
-	    		List<Node> homePath = followParents(homeBfs);
-	    		state.actionQueue =  goToGoal(homePath, state.agent_direction, state.agent_x_position, state.agent_y_position);
-	    		return performTask(state.actionQueue.poll(), p);
-	    	}
-	    }
-	    else if(!state.actionQueue.isEmpty()){
+	    else if(!state.actionQueue.isEmpty()) {
+	    	// If actionQueue isn't empty perform the next action in the queue
 	    	return performTask(state.actionQueue.poll(),p);
-	    } else {
+	    } 
+	    else {
+	    	// Otherwise search for a new target
 	    	Node bfs = bfs(state.UNKNOWN);
 	    	if(bfs != null){
 		    	List<Node> path = followParents(bfs);
 		    	state.actionQueue =  goToGoal(path, state.agent_direction, state.agent_x_position, state.agent_y_position);
 	    	}
 		    else {
-		    	state.findHome = true;
 	    		Node homeBfs = bfs(state.HOME);
 	    		if(homeBfs == null){
-	    			return NoOpAction.NO_OP;
+	    			return NoOpAction.NO_OP; //Already home
 	    		}
 	    		List<Node> homePath = followParents(homeBfs);
 	    		state.actionQueue =  goToGoal(homePath, state.agent_direction, state.agent_x_position, state.agent_y_position);
+	    		state.actionQueue.add(state.ACTION_NONE);
 	    	}
 	    	return performTask(state.actionQueue.poll(), p);
 	    }
 	    
 	}
 
+	/*
+	 * Follows the parent-pointer and constructs a list of the Nodes it passes
+	 */
 	private List<Node> followParents(Node currentNode) {
 		List<Node> result = new ArrayList<Node>();
 		while(currentNode.parent != null){
@@ -378,12 +417,14 @@ class MyAgentProgram implements AgentProgram {
 			currentNode = currentNode.parent;
 		}
 		
-//		result.remove(result.size()-1);
 		Collections.reverse(result);
 		
 		return result;
 	}
 
+	/*
+	 * Converts a state action to a LIUVacuumEnvironment action
+	 */
 	private Action performTask(int action, DynamicPercept p) {
 		if(action == state.ACTION_MOVE_FORWARD){
 			state.agent_last_action = state.ACTION_MOVE_FORWARD;

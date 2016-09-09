@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="30" version="2.0">
+<workbench progressCount="15" version="2.0">
 <workbenchAdvisor/>
-<window height="769" width="1030" x="106" y="33">
+<window height="769" maximized="true" width="1030" x="2665" y="0">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
 </perspectiveBar>
-<coolbarLayout locked="0">
+<coolbarLayout>
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="96" y="26"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="134" y="30"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
 <coolItem id="com.google.gdt.eclipse.suite.actionSet" itemType="typeToolBarContribution" x="88" y="26"/>
-<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="112" y="26"/>
-<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="122" y="26"/>
-<coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.debug.ui.launch.toolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="144" y="30"/>
+<coolItem id="org.eclipse.debug.ui.main.toolbar" itemType="typeToolBarContribution" x="38" y="30"/>
+<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="108" y="30"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="82" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="116" y="30"/>
 <coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="122" y="26"/>
+<coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="172" y="26"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="214" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditorNoSource" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -27,20 +32,83 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
+<part id="7"/>
+<part id="8"/>
+<part id="9"/>
+<part id="10"/>
+</presentation>
 </folder>
 </info>
 </editorArea>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CustomBreadthFirstSearch.java" partName="CustomBreadthFirstSearch.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/searchCustom/CustomBreadthFirstSearch.java" title="CustomBreadthFirstSearch.java" tooltip="lab2_part1/src/searchCustom/CustomBreadthFirstSearch.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/searchCustom/CustomBreadthFirstSearch.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="186" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CustomDepthFirstSearch.java" partName="CustomDepthFirstSearch.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/searchCustom/CustomDepthFirstSearch.java" title="CustomDepthFirstSearch.java" tooltip="lab2_part1/src/searchCustom/CustomDepthFirstSearch.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/searchCustom/CustomDepthFirstSearch.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="178" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CustomGraphSearch.java" partName="CustomGraphSearch.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/searchCustom/CustomGraphSearch.java" title="CustomGraphSearch.java" tooltip="lab2_part1/src/searchCustom/CustomGraphSearch.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/searchCustom/CustomGraphSearch.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="46" selectionOffset="3731" selectionTopPixel="670"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/main/Main.java" title="Main.java" tooltip="lab2_part1/src/main/Main.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/main/Main.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="1317"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Agent.java" partName="Agent.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/main/Agent.java" title="Agent.java" tooltip="lab2_part1/src/main/Agent.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/main/Agent.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10030" selectionTopPixel="4730"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="NodeQueue.java" partName="NodeQueue.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/searchShared/NodeQueue.java" title="NodeQueue.java" tooltip="lab2_part1/src/searchShared/NodeQueue.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/searchShared/NodeQueue.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="978" selectionTopPixel="356"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Problem.java" partName="Problem.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/searchShared/Problem.java" title="Problem.java" tooltip="lab2_part1/src/searchShared/Problem.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/searchShared/Problem.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="647" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GridPos.java" partName="GridPos.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/world/GridPos.java" title="GridPos.java" tooltip="lab2_part1/src/world/GridPos.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/world/GridPos.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="742" selectionTopPixel="1602"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SearchNode.java" partName="SearchNode.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/searchShared/SearchNode.java" title="SearchNode.java" tooltip="lab2_part1/src/searchShared/SearchNode.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/searchShared/SearchNode.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="17" selectionOffset="379" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SearchObject.java" partName="SearchObject.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/searchShared/SearchObject.java" title="SearchObject.java" tooltip="lab2_part1/src/searchShared/SearchObject.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/searchShared/SearchObject.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="World.java" partName="World.java" path="/home/victr593/Documents/TDDC17/TDDC17/lab2_workspace/lab2_part1/src/world/World.java" title="World.java" tooltip="lab2_part1/src/world/World.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/lab2_part1/src/world/World.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="624"/>
+</editor>
 </editors>
 <views>
 <view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
 <viewState CommonNavigator.LINKING_ENABLED="0" CommonNavigator.LINKING_ENABLED.delayed="0" org.eclipse.cdt.ui.cview.groupincludes="false" org.eclipse.cdt.ui.editor.CUChildren="true" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
 </view>
 <view id="org.eclipse.jdt.ui.TypeHierarchy" partName="Hierarchy"/>
+<view id="org.eclipse.search.ui.views.SearchView" partName="Search">
+<viewState isPinned="false">
+<view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
+<view IMemento.internal.id="org.eclipse.jdt.ui.JavaSearchResultPage" org.eclipse.jdt.search.resultpage.grouping="3" org.eclipse.jdt.search.resultpage.limit="1000" org.eclipse.jdt.search.resultpage.limit_enabled="TRUE" org.eclipse.jdt.search.resultpage.sorting="1" org.eclipse.search.lastActivation="1" org.eclipse.search.resultpage.layout="2"/>
+</viewState>
+</view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
 <category IMemento.internal.id="Warnings (100 of 155 items)"/>
+<category IMemento.internal.id="Warnings"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="73" org.eclipse.ui.ide.markerType="108" org.eclipse.ui.ide.pathField="143" org.eclipse.ui.ide.resourceField="108" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -58,53 +126,29 @@
 <customFilters userDefinedPatternsEnabled="false">
 <xmlDefinedFilters>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.LibraryFilter" isEnabled="false"/>
-<child filterId="org.eclipse.ajdt.javamodel.CompilationUnitFilter" isEnabled="true"/>
-<child filterId="org.eclipse.ajdt.ui.editor.outline.PointcutFilter" isEnabled="false"/>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer.CuAndClassFileFilter" isEnabled="false"/>
-<child filterId="org.eclipse.pde.ui.ExternalPluginLibrariesFilter1" isEnabled="true"/>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer_patternFilterId_RemoteSystemsConnections" isEnabled="true"/>
-<child filterId="_patternFilterId_*.ajsym" isEnabled="true"/>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer.FieldsFilter" isEnabled="false"/>
-<child filterId="org.eclipse.ajdt.ui.editor.outline.IntroductionFilter" isEnabled="false"/>
-<child filterId="org.eclipse.jdt.internal.ui.PackageExplorer.HideInnerClassFilesFilter" isEnabled="true"/>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonPublicFilter" isEnabled="false"/>
-<child filterId="org.eclipse.ajdt.ui.editor.outline.AdviceFilter" isEnabled="false"/>
-<child filterId="org.eclipse.pde.ui.BinaryProjectFilter1" isEnabled="false"/>
-<child filterId="org.eclipse.mylyn.java.ui.MembersFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.LocalTypesFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.StaticsFilter" isEnabled="false"/>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer.ContainedLibraryFilter" isEnabled="false"/>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonJavaElementFilter" isEnabled="false"/>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonSharedProjectsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.pde.ui.ExternalPluginLibrariesFilter1" isEnabled="true"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.ClosedProjectsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonSharedProjectsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonJavaElementFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.ContainedLibraryFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.CuAndClassFileFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.NonJavaProjectsFilter" isEnabled="false"/>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer.PackageDeclarationFilter" isEnabled="true"/>
 <child filterId="org.eclipse.jdt.internal.ui.PackageExplorer.EmptyInnerPackageFilter" isEnabled="true"/>
-<child filterId="org.eclipse.ajdt.ui.editor.outline.DeclarationFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.PackageDeclarationFilter" isEnabled="true"/>
 <child filterId="org.eclipse.jdt.internal.ui.PackageExplorer.EmptyPackageFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.ImportDeclarationFilter" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.FieldsFilter" isEnabled="false"/>
+<child filterId="org.eclipse.jdt.internal.ui.PackageExplorer.HideInnerClassFilesFilter" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer.NonPublicFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer_patternFilterId_.*" isEnabled="true"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.EmptyLibraryContainerFilter" isEnabled="true"/>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer_patternFilterId_RemoteSystemsTempFiles" isEnabled="true"/>
+<child filterId="org.eclipse.pde.ui.BinaryProjectFilter1" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.SyntheticMembersFilter" isEnabled="true"/>
 </xmlDefinedFilters>
 </customFilters>
 </viewState>
-</view>
-<view id="org.eclipse.mylyn.tasks.ui.views.tasks" partName="Task List">
-<viewState linkWithEditor="true" presentation="org.eclipse.mylyn.tasks.ui.categorized">
-<sorter groupBy="CATEGORY_QUERY">
-<sorter>
-<sort0 sortDirection="1" sortKey="PRIORITY"/>
-<sort1 sortDirection="1" sortKey="DATE_CREATED"/>
-<sort2 sortDirection="1" sortKey="NONE"/>
-<sort3 sortDirection="1" sortKey="NONE"/>
-</sorter>
-</sorter>
-</viewState>
-</view>
-<view id="org.eclipse.cdt.ui.tests.DOMAST.DOMAST" partName="DOM AST">
-<viewState/>
 </view>
 <view id="org.eclipse.ui.views.TaskList" partName="Tasks">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.completionField" categoryGroup="none" markerContentGenerator="org.eclipse.ui.ide.tasksGenerator" partName="Tasks">
@@ -124,7 +168,7 @@
 </view>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.ui.internal.ide.application.ResourcePerspective" id="org.eclipse.ui.resourcePerspective" label="Resource"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -176,9 +220,9 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="org.eclipse.ui.navigator.ProjectExplorer"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
-<view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
+<view id="org.eclipse.mylyn.tasks.ui.views.tasks" removed="true"/>
 <view id="org.eclipse.ui.views.TaskList"/>
-<view id="org.eclipse.cdt.ui.tests.DOMAST.DOMAST"/>
+<view id="org.eclipse.cdt.ui.tests.DOMAST.DOMAST" removed="true"/>
 <fastViewBars/>
 <layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="topLeft">&#x0A;<folder activePageID="org.eclipse.ui.navigator.ProjectExplorer" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.navigator.ProjectExplorer" label="Project Explorer"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
@@ -231,23 +275,10 @@
 <alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
-<alwaysOnActionSet id="org.eclipse.mylyn.context.ui.actionSet"/>
-<alwaysOnActionSet id="org.eclipse.mylyn.tasks.ui.navigation"/>
-<alwaysOnActionSet id="org.eclipse.rse.core.search.searchActionSet"/>
-<alwaysOnActionSet id="org.eclipse.mylyn.doc.actionSet"/>
-<alwaysOnActionSet id="ajrefactoring"/>
-<alwaysOnActionSet id="org.eclipse.contribution.xref.ui.XRefActionSet"/>
-<alwaysOnActionSet id="org.eclipse.team.svn.ui.menu.help"/>
-<alwaysOnActionSet id="com.google.gdt.eclipse.suite.actionSet.2.gae"/>
-<alwaysOnActionSet id="com.google.gdt.eclipse.suite.actionSet"/>
-<alwaysOnActionSet id="com.google.gdt.eclipse.suite.actionSet.1.gwt"/>
-<alwaysOnActionSet id="org.rubypeople.rdt.debug.ui.RDTDebugActionSet"/>
 <alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaElementCreationActionSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.NavigateActionSet"/>
-<alwaysOnActionSet id="ajelementCreation"/>
-<alwaysOnActionSet id="ajnavigation"/>
 <alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.debug.ui.JDTDebugActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.junit.JUnitActionSet"/>
@@ -300,8 +331,8 @@
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.search.ui.views.SearchView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
-<view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
@@ -326,13 +357,13 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.24950495" ratioLeft="252" ratioRight="758" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.74883723" ratioLeft="483" ratioRight="162" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="bottom" ratio="0.49437147" ratioLeft="527" ratioRight="539" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
-<page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
+<page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
 <page content="com.google.gwt.eclipse.DevModeView" label="LabelNotFound"/>
@@ -341,12 +372,13 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@1fe3aa4" ratio="0.74934036" ratioLeft="568" ratioRight="190" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.mylyn.tasks.ui.views.tasks" appearance="2" expanded="2">
-<page content="org.eclipse.mylyn.tasks.ui.views.tasks" label="Task List"/>
+<page content="org.eclipse.mylyn.tasks.ui.views.tasks" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 </presentation>
@@ -368,7 +400,168 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/lab2_part1/src/searchCustom/CustomGraphSearch.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/lab2_part1/src/world/GridPos.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/lab2_part1/src/searchShared/SearchNode.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/lab2_part1/src/searchShared/SearchObject.java"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditorNoSource" org.eclipse.jdt.ui.ClassFileIdentifier="=lab2_part1/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;java.lang(Object.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/lab2_part1/src/world/World.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/lab2_part1/src/searchCustom/CustomDepthFirstSearch.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/lab2_part1/src/searchCustom/CustomBreadthFirstSearch.java"/>
+</editors>
+<item historyLabel="SearchNode.java" index="2">
+<position info="not_deleted" x="398" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2207" y="0"/>
+</item>
+<item historyLabel="SearchNode.java" index="2">
+<position info="not_deleted" x="398" y="0"/>
+</item>
+<item historyLabel="SearchObject.java" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="SearchObject.java" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="SearchNode.java" index="2">
+<position info="not_deleted" x="398" y="0"/>
+</item>
+<item historyLabel="GridPos.java" index="1">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2207" y="0"/>
+</item>
+<item historyLabel="SearchNode.java" index="2">
+<position info="not_deleted" x="187" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2207" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2042" y="0"/>
+</item>
+<item historyLabel="SearchNode.java" index="2">
+<position info="not_deleted" x="379" y="17"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2042" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2288" y="0"/>
+</item>
+<item historyLabel="SearchObject.java" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="SearchNode.java" index="2">
+<position info="not_deleted" x="379" y="17"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2288" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2355" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="831" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="1589" y="0"/>
+</item>
+<item historyLabel="Object.class" index="4">
+<position/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="1589" y="0"/>
+</item>
+<item historyLabel="Object.class" index="4">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="1589" y="0"/>
+</item>
+<item historyLabel="GridPos.java" index="1">
+<position info="not_deleted" x="742" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="1589" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2042" y="0"/>
+</item>
+<item historyLabel="World.java" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="World.java" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2042" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="1921" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2006" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="2006" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="1855" y="0"/>
+</item>
+<item historyLabel="CustomDepthFirstSearch.java" index="6">
+<position/>
+</item>
+<item historyLabel="CustomBreadthFirstSearch.java" index="7">
+<position info="not_deleted" x="248" y="0"/>
+</item>
+<item historyLabel="CustomDepthFirstSearch.java" index="6">
+<position info="not_deleted" x="238" y="1"/>
+</item>
+<item historyLabel="CustomBreadthFirstSearch.java" index="7">
+<position info="not_deleted" x="248" y="0"/>
+</item>
+<item historyLabel="CustomDepthFirstSearch.java" index="6">
+<position info="not_deleted" x="245" y="0"/>
+</item>
+<item historyLabel="CustomBreadthFirstSearch.java" index="7">
+<position info="not_deleted" x="248" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="1855" y="0"/>
+</item>
+<item historyLabel="CustomBreadthFirstSearch.java" index="7">
+<position info="not_deleted" x="248" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="1855" y="0"/>
+</item>
+<item historyLabel="CustomBreadthFirstSearch.java" index="7">
+<position info="not_deleted" x="186" y="0"/>
+</item>
+<item historyLabel="CustomDepthFirstSearch.java" index="6">
+<position info="not_deleted" x="178" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="1855" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="4094" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="4161" y="0"/>
+</item>
+<item historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="4195" y="0"/>
+</item>
+<item active="true" historyLabel="CustomGraphSearch.java" index="0">
+<position info="not_deleted" x="4241" y="0"/>
+</item>
+</navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
@@ -381,9 +574,45 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-<trimItem IMemento.internal.id="com.google.gdt.eclipse.suite.status.trim"/>
 </trimArea>
 </trimLayout>
 </window>
-<mruList/>
+<mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="World.java" tooltip="lab2_part1/src/world/World.java">
+<persistable path="/lab2_part1/src/world/World.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditorNoSource" name="Object.class" tooltip="java.lang.Object">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=lab2_part1/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;java.lang(Object.class"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SearchObject.java" tooltip="lab2_part1/src/searchShared/SearchObject.java">
+<persistable path="/lab2_part1/src/searchShared/SearchObject.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SearchNode.java" tooltip="lab2_part1/src/searchShared/SearchNode.java">
+<persistable path="/lab2_part1/src/searchShared/SearchNode.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GridPos.java" tooltip="lab2_part1/src/world/GridPos.java">
+<persistable path="/lab2_part1/src/world/GridPos.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Problem.java" tooltip="lab2_part1/src/searchShared/Problem.java">
+<persistable path="/lab2_part1/src/searchShared/Problem.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="NodeQueue.java" tooltip="lab2_part1/src/searchShared/NodeQueue.java">
+<persistable path="/lab2_part1/src/searchShared/NodeQueue.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Agent.java" tooltip="lab2_part1/src/main/Agent.java">
+<persistable path="/lab2_part1/src/main/Agent.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="lab2_part1/src/main/Main.java">
+<persistable path="/lab2_part1/src/main/Main.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CustomGraphSearch.java" tooltip="lab2_part1/src/searchCustom/CustomGraphSearch.java">
+<persistable path="/lab2_part1/src/searchCustom/CustomGraphSearch.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CustomDepthFirstSearch.java" tooltip="lab2_part1/src/searchCustom/CustomDepthFirstSearch.java">
+<persistable path="/lab2_part1/src/searchCustom/CustomDepthFirstSearch.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CustomBreadthFirstSearch.java" tooltip="lab2_part1/src/searchCustom/CustomBreadthFirstSearch.java">
+<persistable path="/lab2_part1/src/searchCustom/CustomBreadthFirstSearch.java"/>
+</file>
+</mruList>
 </workbench>

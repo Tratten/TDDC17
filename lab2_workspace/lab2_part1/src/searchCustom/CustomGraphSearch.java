@@ -28,7 +28,6 @@ public class CustomGraphSearch implements SearchObject {
 	 * Implements "graph search", which is the foundation of many search algorithms
 	 */
 	public ArrayList<SearchNode> search(Problem p) {
-		System.out.println("Going in!");
 		// The frontier is a queue of expanded SearchNodes not processed yet
 		frontier = new NodeQueue();
 		/// The explored set is a set of nodes that have been processed 
@@ -41,24 +40,17 @@ public class CustomGraphSearch implements SearchObject {
 		// Path will be empty until we find the goal.
 		path = new ArrayList<SearchNode>();
 		
-		// Implement this!
-		System.out.println("Implement CustomGraphSearch.java!");
-		
 		
 		while(!frontier.isEmpty()){
-
 			SearchNode current = frontier.peekAtFront();
 			frontier.removeFirst();
-			System.out.println("While current:" + current.getState().toString() + " " + current + " size: "+ frontier.size());
 			ArrayList<GridPos> childStates = p.getReachableStatesFrom(current.getState());
 			explored.add(current);
 			
 			for(int i = 0; i < childStates.size(); i++){
 				SearchNode node = new SearchNode(childStates.get(i), current);
-				System.out.println("explored: "  + !explored.contains(childStates.get(i)) + " node: " + node.getState().toString());
 				if(!explored.contains(node)){
 					if(p.isGoalState(node.getState())){
-						System.out.println("WOHO " + node.getState().toString());
 						path = node.getPathFromRoot();
 						return path;
 					}
@@ -66,11 +58,8 @@ public class CustomGraphSearch implements SearchObject {
 						pushNode(frontier, node);
 						explored.add(node);
 					}
-				} else {
-					System.out.println("Already explored!");
 				}
 			}
-			
 		}
 		
 		/* Some hints:

@@ -20,12 +20,12 @@
    ;; Static predicates:
    (object ?o) (truck ?t) (airplane ?p) (vehicle ?v) (boat ?b)
    (location ?l) (airport ?a) (harbor ?h) (city ?c) (loc ?l ?c)
+   (smallPacket ?sp) (mediumPacket ?mp) (bigPacket ?bp) 
+   (smallTruck ?st) (mediumTruck ?mt) (bigTruck ?bt)
 
    ;; Non-static predicates:
    (at ?x ?l) ;; ?x (package or vehicle) is at location ?l
    (in ?p ?v) ;; package ?p is in vehicle ?
-   ;; (in ?mp ?v) ;; mediumPacket
-   ;; (in ?bp ?v) ;; bigPacket
    )
 
   ;; Actions for loading and unloading packages.
@@ -44,18 +44,25 @@
 		       (at ?v ?l) (in ?o ?v))
     :effect (and (at ?o ?l) (not (in ?o ?v))))
 
+  (:action specialUnload
+    :parameters (?o ?t ?l)
+    :precondition (and (object ?o) (or (smallTruck ?t) (mediumTruck ?t)) (location ?l)
+		       (at ?t ?l) (in ?o ?t))
+    :effect (and (at ?o ?l) (not (in ?o ?t))))
+
   (:action smallLoad
     :parameters (?sp ?st ?l)
     :precondition (and (smallPacket ?sp) (smallTruck ?st) (location ?l)
 		       (at ?st ?l) (at ?sp ?l))
     :effect (and (in ?sp ?st) (not (at ?sp ?l))))
 
-  ;; How do we let mediumTrucks carry small packages?
   (:action mediumLoad
     :parameters (?mp ?mt ?l)
-    :precondition (and (mediumPacket ?mp) (mediumTruck ?mt) (location ?l)
+    :precondition (and (or (smallPacket ?mp) (mediumPacket ?mp)) (mediumTruck ?mt) (location ?l)
 		       (at ?mt ?l) (at ?mp ?l))
     :effect (and (in ?mp ?mt) (not (at ?mp ?l))))
+
+  
 
   ;; Drive a truck between two locations in the same city.
   ;; By declaring all locations, including airports, to be of type

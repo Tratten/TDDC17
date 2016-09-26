@@ -9,20 +9,28 @@
    smallTruck1 smallTruck2 smallTruck3 smallTruck4      ;; one truck in each city,
    mediumTruck1 mediumTruck2 mediumTruck3 mediumTruck4 ;; one per city,
    bigTruck1 bigTruck2 bigTruck3 bigTruck4 ;; one bigTruck per city,
-   boat1              ;; boats :)
+   boat1                      ;; boats :)
    airplane1                  ;; only one airplane,
    office1 office2 office3 office4   ;; offices are "non-airport" locations
    airport1 airport2          ;; airports, one per city,
-   harbor1 harbor2 harbor3           ;; gotta float somewhere :)
+   harbor1 harbor2 harbor3    ;; gotta float somewhere :)
    packet1 packet2            ;; two packages to be delivered
-   mediumPacket1              ;; uno mediumo packeto
-   bigPacket1                 ;; one big packet
+   mediumPacket1 mediumPacket2              ;; uno mediumo packeto
+   bigPacket1 bigPacket2                ;; one big packet
    )
   (:init
    ;; Type declarations:
-   (object packet1) (object packet2) (object mediumPacket1) (object bigPacket1)
+   (object packet1) (object packet2) 
+  
+   (object mediumPacket1) (object mediumPacket2) 
    
-   (mediumPacket1
+   (object bigPacket1)(object bigPacket2)
+
+   (smallPacket packet1) (smallPacket packet2)
+   
+   (mediumPacket mediumPacket1) (mediumPacket mediumPacket2)
+   
+   (bigPacket bigPacket1) (bigPacket bigPacket2)
 
    ;; all vehicles must be declared as both "vehicle" and their
    ;; appropriate subtype,
@@ -66,11 +74,18 @@
    (at packet1 office1)
    (at packet2 office3)
    (at mediumPacket1 office2)
+   (at mediumPacket2 office1)
    (at bigPacket1 office4)
-   (at truck1 airport1)
-   (at truck2 airport2)
-   (at truck3 office3)
-   (at truck4 harbor1)
+   (at bigPacket2 office3)
+
+   ;; (at smallTruck1 airport2)
+   ;; (at smallTruck2 airport1)
+   ;; (at smallTruck3 office3)
+   ;; (at smallTruck4 office4)
+   ;; (at mediumTruck1 office2)
+   ;; (at mediumTruck2 airport1)
+   ;; (at mediumTruck3 harbor1)
+   ;; (at mediumTruck4 office1)
    (at bigTruck1 office1)
    (at bigTruck2 office2)
    (at bigTruck3 office3)
@@ -80,5 +95,9 @@
    )
 
   ;; The goal is to have both packages delivered to their destinations:
-  (:goal (and (at packet1 office2) (at packet2 office4) (at mediumPacket1 office1) (at bigPacket1 office3))
+  (:goal (and (at packet1 office2) (at packet2 office4)
+	      (at mediumPacket1 office1) (at mediumPacket2 office4)
+	      (at bigPacket1 office3) (at bigPacket2 office1)
+	 )
   )
+)

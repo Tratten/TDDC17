@@ -147,7 +147,7 @@ public class StateAndReward {
 			reward += 20;
 		}
 		
-		if(vy < 0.7 && vy > -0.7){
+		if(vy < 0.5 && vy > -0.5){
 			reward += 20;
 		}
 		

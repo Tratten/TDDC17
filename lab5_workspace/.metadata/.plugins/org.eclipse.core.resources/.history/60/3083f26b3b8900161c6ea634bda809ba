@@ -136,18 +136,14 @@ public class StateAndReward {
 			reward += 8;
 		}
 
-		if(vx < 0.3 && vx > -0.3){
-			reward += 2;
-		}
-		if(vy < 2.5 && vy > -2.5){
+//		if(vx < 0.3 && vx > -0.3){
+//			reward += 8;
+//		}
+		if(vy < 2 && vy > -2){
 			reward += 10;
 		}
 		
-		if(vy < 1 && vy > -1){
-			reward += 20;
-		}
-		
-		if(vy < 0.7 && vy > -0.7){
+		if(vy < 0.5 && vy > -0.5){
 			reward += 20;
 		}
 		

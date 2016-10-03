@@ -108,8 +108,6 @@ public class StateAndReward {
 			state += "Still";
 		}
 		
-		state += "£";
-		
 		if(vy > 1){
 			state += "Down";
 		}else if(vy < -1){
@@ -137,17 +135,9 @@ public class StateAndReward {
 		}
 
 		if(vx < 0.3 && vx > -0.3){
-			reward += 2;
+			reward += 8;
 		}
-		if(vy < 2.5 && vy > -2.5){
-			reward += 10;
-		}
-		
 		if(vy < 1 && vy > -1){
-			reward += 20;
-		}
-		
-		if(vy < 0.7 && vy > -0.7){
 			reward += 20;
 		}
 		

@@ -9,10 +9,8 @@ Lab 1 - Intelligent Agents
 
 Lab 2 - Search
 
-Lab 3 -
+Lab 3 - Bayesian Networks
 
-Lab 4 -
+Lab 4 -  Planning
 
-Lab 5 -
-
-I will update this readme with information regarding each laboration progressively.
+Lab 5 - Reinforcement Learning

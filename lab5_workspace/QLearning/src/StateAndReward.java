@@ -4,7 +4,6 @@ public class StateAndReward {
 	/* State discretization function for the angle controller */
 	public static String getStateAngle(double angle, double vx, double vy) {
 
-		/* TODO: IMPLEMENT THIS FUNCTION */
 		String state = "";
 		
 		if(angle  < 0.2 && angle > -0.2){
@@ -32,7 +31,6 @@ public class StateAndReward {
 				state += "down#Right";
 			}
 		}
-//		String state = "OneStateToRuleThemAll";
 		
 		return state;
 	}
@@ -62,14 +60,10 @@ public class StateAndReward {
 	/* State discretization function for the full hover controller */
 	public static String getStateHover(double angle, double vx, double vy) {
 
-		/* TODO: IMPLEMENT THIS FUNCTION */
 		String state = "";
 		
-		if(angle == 0){
-			//perfect
-			state += "perfect";
-		}
-		else if(angle  < 0.2 && angle > 0){
+		
+		if(angle  < 0.2 && angle > 0){
 			state += "upUpRight";
 		}				
 		else if(angle > -0.2 && angle < 0){
@@ -117,8 +111,6 @@ public class StateAndReward {
 		}else {
 			state += "Still";
 		}
-
-//		String state = "OneStateToRuleThemAll";
 		
 		return state;
 	}
@@ -126,7 +118,6 @@ public class StateAndReward {
 	/* Reward function for the full hover controller */
 	public static double getRewardHover(double angle, double vx, double vy) {
 
-		/* TODO: IMPLEMENT THIS FUNCTION */
 		double reward = 0;
 		
 		if(angle < 0.1 && angle > -0.1){

@@ -14,5 +14,3 @@ Lab 3 - Bayesian Networks
 Lab 4 -  Planning
 
 Lab 5 - Reinforcement Learning
-
-I will update this readme with information regarding each laboration progressively.
